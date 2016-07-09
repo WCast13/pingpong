@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
 
   # GET /players
   # GET /players.json
-  def index
+  def standings
     @players = Player.all
   end
 
