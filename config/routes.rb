@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/' => 'homepage#home'
   get '/new' => 'players#new'
   get '/standings' => 'players#standings'
+  get '/submit' => "submitscore#submit"
 end

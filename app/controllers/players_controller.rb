@@ -1,10 +1,24 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
 
+
+
   # GET /players
   # GET /players.json
   def standings
+
     @players = Player.all
+    @players = @players.sort { |a,b|
+      if   b.wins == a.wins && a.pf == b.pf
+         a.pa <=> a.pf
+       elsif b.wins == a.wins
+          b.pf <=> a.pf
+        else
+          b.wins <=> a.wins
+        end
+      }
+
+
   end
 
   # GET /players/1
