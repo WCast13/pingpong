@@ -13,6 +13,22 @@
   <strong>Slack name:</strong>
   <%= @player.slack_name %>
 </p>
+<p>
+  <strong>Wins:</strong>
+  <%= @player.wins %>
+</p>
+<p>
+  <strong>Losses:</strong>
+  <%= @player.wins %>
+</p>
+<p>
+  <strong>Points For:</strong>
+  <%= @player.pf %>
+</p>
+<p>
+  <strong>Points Against:</strong>
+  <%= @player.pa %>
+</p>
 
 <!-- <%= link_to 'Edit', edit_player_path(@player) %> | -->
 <%= link_to "standings", '/standings', :method => :get %>
