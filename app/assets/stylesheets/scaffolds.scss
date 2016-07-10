@@ -41,13 +41,18 @@ td {
   padding-bottom: 7px;
   padding-left: 5px;
   padding-right: 5px;
+  margin: 0 auto;
+
 }
 
 div {
   &.field, &.actions {
     margin-bottom: 10px;
+
   }
 }
+
+
 
 #notice {
   color: green;

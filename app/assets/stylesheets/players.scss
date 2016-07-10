@@ -19,20 +19,35 @@ html body div.create_player {
 
 
 }
-html body div.create_player div.player_header {
-
-color: black;
-font-style: bold;
-font-weight: 1000;
+div.field, div.actions{
+display: inline-table;
 
 
 }
-html body div.create_player {
+
+html body div.form {
   color: black;
   font-style: bold;
   font-weight: 1000;
+  margin-bottom: 20px;
+  display: inline-table;
+
+
+}
+h1.title_create {
+margin-bottom: 25px;
 
 
 
+}
+label {
+margin: auto 15px;
 
+
+}
+
+button, input, select, textarea {
+display: -webkit-box;
+margin: 0 auto;
+// ^THis should center the text boxes and it doesn't :(
 }

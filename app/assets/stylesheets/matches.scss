@@ -7,7 +7,7 @@ html body div.matches_background {
   background-size: cover;
   height: 100%;
   width: 100%;
-
+  positon: relative;
   padding: 100px;
 }
 html body h1.submit {
@@ -15,6 +15,7 @@ html body h1.submit {
   font-style: bold;
   font-weight: 1000;
   margin-bottom: 20px;
+  margin-top: -10px
 }
 html body div.form {
   color: black;
@@ -22,5 +23,9 @@ html body div.form {
   font-weight: 1000;
   margin-bottom: 20px;
 
+}
+html body div.field {
 
+
+  display: inherit;
 }
