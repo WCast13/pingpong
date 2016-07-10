@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>This is the matches home page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Winners slack name</th>
+      <th>Losers slack name</th>
+      <th>Winners score</th>
+      <th>Losers score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= match.winners_slack_name %></td>
+        <td><%= match.losers_slack_name %></td>
+        <td><%= match.winners_score %></td>
+        <td><%= match.losers_score %></td>
+        <td><%= link_to 'Show', match %></td>
+        <td><%= link_to 'Edit', edit_match_path(match) %></td>
+        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Match', new_match_path %>
