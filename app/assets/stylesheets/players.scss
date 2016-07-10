@@ -1,34 +1,37 @@
 // Place all the styles related to the Players controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-div.player_header {
-margin-bottom: 50px;
 
 
 
-}
-div.create_player{
 
-background-color: lightblue;
-// I wannt to make this color the whole screen
 
-}
+html body div.create_player {
+  background-image: image-url('new_photo.jpg');
+  background-repeat: no-repeat;no-repeatdisplay: compact;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  text-align:center;
+  padding: 100px;
 
-div.field  {
-padding: 5px;
-display: inline-flex;
 
 
 
 }
-label {
-margin-right: 10px;
+html body div.create_player div.player_header {
+
+color: black;
+font-style: bold;
+font-weight: 1000;
 
 
 }
-body {
+html body div.create_player {
+  color: black;
+  font-style: bold;
+  font-weight: 1000;
 
-background-color: lightblue;
 
 
 
