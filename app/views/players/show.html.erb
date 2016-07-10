@@ -7,6 +7,7 @@
 <p>
   <strong>Name:</strong>
   <%= @player.name %>
+
 </p>
 
 <p>
@@ -19,7 +20,7 @@
 </p>
 <p>
   <strong>Losses:</strong>
-  <%= @player.wins %>
+  <%= @player.losses %>
 </p>
 <p>
   <strong>Points For:</strong>
@@ -31,4 +32,6 @@
 </p>
 
 <!-- <%= link_to 'Edit', edit_player_path(@player) %> | -->
+<button class= "button">
 <%= link_to "standings", '/standings', :method => :get %>
+</button>

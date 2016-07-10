@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/new' => 'players#new'
   get '/standings' => 'players#standings'
   get '/submit' => "submitscore#submit"
+  get '/player/[:id]' => 'players#standings'
 end

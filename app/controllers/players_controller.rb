@@ -6,7 +6,6 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def standings
-
     @players = Player.all
     @players = @players.sort { |a,b|
       if   b.wins == a.wins && a.pf == b.pf
