@@ -11,6 +11,7 @@
       <th>Slack name</th>
       <th>Wins</th>
       <th>Losses</th>
+      <th>Win Percentage</th>
       <th>Points For</th>
       <th>Points Against</th>
       <th colspan="3"></th>
@@ -28,9 +29,10 @@
         <td><%= player.slack_name %></td>
         <td><%= player.wins %></td>
         <td><%= player.losses %></td>
+        <td><%= ((player.wins.to_f/(player.wins + player.losses)) * 100).round(2) %>%</td>
         <td><%= player.pf %></td>
         <td><%= player.pa %></td>
-        <td><%= link_to 'Show', player %></td>
+        <td type="button" class="btn btn-info"><%= link_to 'Show Player', player %></td>
         <!-- <td><%= link_to 'Edit', edit_player_path(player) %></td> -->
         <!-- <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>

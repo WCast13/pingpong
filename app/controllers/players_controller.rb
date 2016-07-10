@@ -18,7 +18,6 @@ class PlayersController < ApplicationController
         end
       }
 
-
   end
 
   # GET /players/1
