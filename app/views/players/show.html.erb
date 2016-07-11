@@ -1,9 +1,11 @@
-<h1>Player Bio Page</h1>
+<div class = "background">
+
+<h1 class= "bio">Player Bio Page</h1>
 
 <p id="notice"><%= notice %></p>
 
 
-
+<div class="player_bio">
 <p>
   <strong>Name:</strong>
   <%= @player.name %>
@@ -30,8 +32,9 @@
   <strong>Points Against:</strong>
   <%= @player.pa %>
 </p>
-
+</div>
 <!-- <%= link_to 'Edit', edit_player_path(@player) %> | -->
 <button class= "button">
 <%= link_to "standings", '/standings', :method => :get %>
 </button>
+</div>
