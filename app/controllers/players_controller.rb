@@ -6,7 +6,18 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def standings
+
     @players = Player.all
+    # @players.each |player|
+    # @players.matches.each do |match|
+    # player.pf +=match.winners_score
+    # player.pa += match.losers_score
+    # Player.find_by(slack_name: match.winners_slack_name) += 1
+    # Player.find_by(slack_name: match.losers_slack_name) += 1
+  # end
+
+
+
     @players = @players.sort { |a,b|
       if   b.wins == a.wins && a.pf == b.pf
          a.pa <=> a.pf
@@ -37,7 +48,10 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
     @player = Player.new(player_params)
-
+    @player.wins = 0
+    @player.losses = 0
+    @player.pf = 0
+    @player.pa = 0
     respond_to do |format|
       if @player.save
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
