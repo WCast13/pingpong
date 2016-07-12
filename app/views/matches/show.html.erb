@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h1>Congrats <%= @match.winners_slack_name %> you have won!!!! </h1>
 
 <p>
   <strong>Winners slack name:</strong>
@@ -19,6 +19,7 @@
   <strong>Losers score:</strong>
   <%= @match.losers_score %>
 </p>
-
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
+<button class= "button">
+<%= link_to "standings", '/standings', :method => :get %>
+</button>
+<!-- <%= link_to 'Back', matches_path %> -->
