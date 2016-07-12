@@ -1,0 +1,19 @@
+.create_player {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Chalkduster";
+  color: red;
+  margin-top: 150px;
+}
+
+.create_player h1 {
+  font-size: 48px;
+}
+
+.field, .actions {
+  font-size: 24px;
+  text-align: center;
+  color: blue;
+  display: inline-table;
+  margin: 20px;
+}
