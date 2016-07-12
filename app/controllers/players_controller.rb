@@ -6,19 +6,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def standings
-
-    @players = Player.all
-    # @players.each |player|
-    # @players.matches.each do |match|
-    # player.pf +=match.winners_score
-    # player.pa += match.losers_score
-    # Player.find_by(slack_name: match.winners_slack_name) += 1
-    # Player.find_by(slack_name: match.losers_slack_name) += 1
-  # end
-
-
-
-    @players = @players.sort { |a,b|
+    @players = Player.all.sort { |a,b|
       if   b.wins == a.wins && a.pf == b.pf
          a.pa <=> a.pf
        elsif b.wins == a.wins
@@ -27,7 +15,6 @@ class PlayersController < ApplicationController
           b.wins <=> a.wins
         end
       }
-
   end
 
   # GET /players/1

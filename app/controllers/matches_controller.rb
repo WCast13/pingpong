@@ -25,11 +25,25 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
-  
+    @match = Match.new(match_params)
+    # p "*" * 50
+    # p match_params
+    # p "*" * 50
+    @player_winner = Player.find_by(slack_name: match_params["winners_slack_name"])
+    @player_loser = Player.find_by(slack_name: match_params["losers_slack_name"])
+
     respond_to do |format|
       if @match.save
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
+        @player_winner.wins += 1
+        @player_winner.pf += @match.winners_score
+        @player_winner.pa += @match.losers_score
+        @player_loser.losses += 1
+        @player_loser.pf += @match.losers_score
+        @player_loser.pa += @match.winners_score
+        @player_winner.save
+        @player_loser.save
       else
         format.html { render :new }
         format.json { render json: @match.errors, status: :unprocessable_entity }
