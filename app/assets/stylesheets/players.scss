@@ -2,23 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
-
-
 html body div.create_player {
-  background-image: image-url('new_photo.jpg');
-  background-repeat: no-repeat;no-repeatdisplay: compact;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  text-align:center;
-  padding: 100px;
-
-
-
-
+  text-align: center;
+  font-weight: bold;
+  font-family: "Chalkduster";
+  color: red;
 }
+
 div.field, div.actions{
 display: inline-table;
 

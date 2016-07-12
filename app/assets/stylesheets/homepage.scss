@@ -1,19 +1,30 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-html {
-height: 100%;
-width: auto;
-
-
-
+body {
+  background-image: url(new_photo.jpg);
+  background-size: cover;
 }
-body{
-  height: 100%;
-  width: auto;
 
+header li{
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  font-family: "Chalkduster";
 }
-div.background_image {
-  background-image:url(ping_pong_background.jpg)no-repeat center center fixed;
-  background-size: 100% 100%;
+
+#body h1{
+  font-size: 72px;
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Chalkduster";
+}
+
+#body p {
+  font-size: 36px;
+  text-align: center;
+  margin: 20px;
+  color: blue;
+  font-family: "Chalkduster";
 }
