@@ -1,25 +1,18 @@
 // Place all the styles related to the standings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-h1.jumbotron {
-  background-color: lightblue;
+.standings {
   text-align: center;
-
-
-
-
+  font-weight: bold;
+  font-family: "Chalkduster";
+  font-size: 48px;
 }
-body {
 
-
-
+.table {
+  font-size: 18px;
 }
-table {
-margin-left: 20px;
 
-
-
-}
-div.field input{
-  margin: auto;
+.button {
+  font-size: 18px;
+  color: black;
 }

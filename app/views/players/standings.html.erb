@@ -1,6 +1,15 @@
-<h1 class="jumbotron">Standings</h1>
+<header>
+  <ul class="nav nav-tabs nav-justified">
+    <li><%= link_to "Home", '/' %></li>
+    <li><%= link_to 'New Player', '/new' %></li>
+    <li><%= link_to "Standings", '/standings' %></li>
+    <li><%= link_to "Submit Score", '/matches/new' %></li>
+  </ul>
+</header>
 
-
+<div class="standings">
+  <h1>Standings</h1>
+</div>
 
 
 <table class="table">
@@ -32,7 +41,7 @@
         <td><%= ((player.wins.to_f/(player.wins + player.losses)) * 100).round(2) %>%</td>
         <td><%= player.pf %></td>
         <td><%= player.pa %></td>
-        <td type="button" class="btn btn-info"><%= link_to 'Show Player', player %></td>
+        <td type="button" class="button"><%= link_to 'Show Player', player %></td>
         <!-- <td><%= link_to 'Edit', edit_player_path(player) %></td> -->
         <!-- <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
