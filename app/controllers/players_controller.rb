@@ -5,9 +5,7 @@ class PlayersController < ApplicationController
 
   # GET /players
   # GET /players.json
-  def self.standings
-    standings
-  end
+
 
   def standings
     @players = Player.all.sort { |a,b|
