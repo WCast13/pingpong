@@ -1,40 +1,52 @@
-<div class = "background">
-
-<h1 class= "bio">Player Bio Page</h1>
-
-<p id="notice"><%= notice %></p>
-
+<header>
+  <ul class="nav nav-tabs nav-justified">
+    <li><%= link_to "Home", '/' %></li>
+    <li><%= link_to 'New Player', '/new' %></li>
+    <li><%= link_to "Standings", '/standings' %></li>
+    <li><%= link_to "Submit Score", '/matches/new' %></li>
+  </ul>
+</header>
 
 <div class="player_bio">
-<p>
-  <strong>Name:</strong>
-  <%= @player.name %>
+  <div class = "player_head">
+    <h1>Player Bio Page</h1>
+    <p id="notice"><%= notice %></p>
+  </div>
 
-</p>
+  <div class="player_text">
+    <p>
+      <strong>Name:</strong>
+      <%= @player.name %>
+    </p>
 
-<p>
-  <strong>Slack name:</strong>
-  <%= @player.slack_name %>
-</p>
-<p>
-  <strong>Wins:</strong>
-  <%= @player.wins %>
-</p>
-<p>
-  <strong>Losses:</strong>
-  <%= @player.losses %>
-</p>
-<p>
-  <strong>Points For:</strong>
-  <%= @player.pf %>
-</p>
-<p>
-  <strong>Points Against:</strong>
-  <%= @player.pa %>
-</p>
-</div>
-<!-- <%= link_to 'Edit', edit_player_path(@player) %> | -->
-<button class= "button">
-<%= link_to "standings", '/standings', :method => :get %>
-</button>
+    <p>
+      <strong>Slack name:</strong>
+      <%= @player.slack_name %>
+    </p>
+
+    <p>
+      <strong>Wins:</strong>
+      <%= @player.wins %>
+    </p>
+
+    <p>
+      <strong>Losses:</strong>
+      <%= @player.losses %>
+    </p>
+
+    <p>
+      <strong>Points For:</strong>
+      <%= @player.pf %>
+    </p>
+
+    <p>
+      <strong>Points Against:</strong>
+      <%= @player.pa %>
+    </p>
+  </div>
+  <!-- <%= link_to 'Edit', edit_player_path(@player) %> | -->
+  <button class= "button">
+  <%= link_to "Standings", '/standings', :method => :get %>
+  </button>
+  </div>
 </div>

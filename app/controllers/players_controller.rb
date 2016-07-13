@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
 
 
   def standings
+    p Player.all
     @players = Player.all.sort { |a,b|
       if   b.wins == a.wins && a.pf == b.pf
          a.pa <=> a.pf
