@@ -1,3 +1,17 @@
 // Place all the styles related to the Matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.winner {
+  text-align: center;
+  font-size: 24px;
+  font-family: "Chalkduster";
+  color: blue;
+}
+
+.winner h1 {
+  color: red;
+  margin-top: 150px;
+  margin-bottom: 30px;
+  font-size: 48px;
+}

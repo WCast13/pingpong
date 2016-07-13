@@ -1,3 +1,4 @@
+<div class="top_bar">
 <header>
   <ul class="nav nav-tabs nav-justified">
     <li><%= link_to "Home", '/' %></li>
@@ -6,6 +7,7 @@
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
+</div>
 
 <div class="standings">
   <h1>Standings</h1>
@@ -17,7 +19,7 @@
     <tr>
       <th>Rank</th>
       <th>Name</th>
-      <th>Slack name</th>
+      <!-- <th>Slack name</th> -->
       <th>Wins</th>
       <th>Losses</th>
       <th>Win Percentage</th>
@@ -28,14 +30,11 @@
   </thead>
 
   <tbody>
-
     <% @players.each_with_index do |player, index| %>
-
-
       <tr>
         <td><%= index + 1 %></td>
         <td><%= player.name %></td>
-        <td><%= player.slack_name %></td>
+        <!-- <td><%= player.slack_name %></td> -->
         <td><%= player.wins %></td>
         <td><%= player.losses %></td>
         <td><%= ((player.wins.to_f/(player.wins + player.losses)) * 100).round(2) %>%</td>
@@ -48,14 +47,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-<button type="button" class="btn btn-info">
-<%= link_to 'New Player', '/new' %>
-</button>
-<button type="button" class="btn btn-info">
-<%= link_to 'Home', '/' %>
-</button>
-<button type="button" class="btn btn-info">
-<%= link_to 'Submit Score', '/matches/new' %>
-</button>

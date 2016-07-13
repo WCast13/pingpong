@@ -1,25 +1,32 @@
-<h1>Congrats <%= @match.winners_slack_name %> you have won!!!! </h1>
+<header>
+  <ul class="nav nav-tabs nav-justified">
+    <li><%= link_to "Home", '/' %></li>
+    <li><%= link_to 'New Player', '/new' %></li>
+    <li><%= link_to "Standings", '/standings' %></li>
+    <li><%= link_to "Submit Score", '/matches/new' %></li>
+  </ul>
+</header>
 
-<p>
-  <strong>Winners slack name:</strong>
-  <%= @match.winners_slack_name %>
-</p>
+<div class="winner">
+  <h1>Congrats <%= @match.winners_slack_name %> you have won!!!! </h1>
+  <p>
+    <strong>Winners slack name:</strong>
+      <%= @match.winners_slack_name %>
+  </p>
 
-<p>
-  <strong>Losers slack name:</strong>
-  <%= @match.losers_slack_name %>
-</p>
+  <p>
+    <strong>Losers slack name:</strong>
+      <%= @match.losers_slack_name %>
+  </p>
 
-<p>
-  <strong>Winners score:</strong>
-  <%= @match.winners_score %>
-</p>
+  <p>
+    <strong>Winners score:</strong>
+      <%= @match.winners_score %>
+  </p>
 
-<p>
-  <strong>Losers score:</strong>
-  <%= @match.losers_score %>
-</p>
-<button class= "button">
-<%= link_to "standings", '/standings', :method => :get %>
-</button>
-<!-- <%= link_to 'Back', matches_path %> -->
+  <p>
+    <strong>Losers score:</strong>
+      <%= @match.losers_score %>
+  </p>
+</div>
+  <!-- <%= link_to 'Back', matches_path %> -->
