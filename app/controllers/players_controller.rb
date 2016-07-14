@@ -5,20 +5,24 @@ class PlayersController < ApplicationController
 
   # GET /players
   # GET /players.json
-
-
   def standings
-    p Player.all
+
+    Player.all.each do |player|
+      if player.losses == 0 && player.wins == 0
+        player.update(win_percentage: 0)
+      elsif player.losses == 0
+        player.update(win_percentage: 100)
+      else
+        player.update(win_percentage: (player.wins/(player.wins + player.losses)) * 100)
+      end
+
+    end
+
+
     @players = Player.all.sort { |a,b|
-      if   b.wins == a.wins && a.pf == b.pf
-         a.pa <=> a.pf
-       elsif b.wins == a.wins
-          b.pf <=> a.pf
-        else
-          b.wins <=> a.wins
-        end
-      }
-  end
+      a.win_percentage == b.win_percentage ? b.pf <=> a.pf : b.win_percentage <=> a.win_percentage
+    }
+    end
 
   # GET /players/1
   # GET /players/1.json
@@ -42,6 +46,8 @@ class PlayersController < ApplicationController
     @player.losses = 0
     @player.pf = 0
     @player.pa = 0
+    @player.win_percentage = 0
+
     respond_to do |format|
       if @player.save
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
