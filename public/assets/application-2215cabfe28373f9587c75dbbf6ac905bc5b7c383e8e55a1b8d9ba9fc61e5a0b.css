@@ -1,0 +1,142 @@
+/* line 4, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/homepage.scss */
+body {
+  background-image: url(/assets/new_photo-a33ea9855ec813ca9f0a4ad96b8f9839815e36b7a2c88e8dc356ce08ff748360.jpg);
+  background-size: cover;
+}
+
+/* line 9, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/homepage.scss */
+header li {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  font-family: "Chalkduster";
+}
+
+/* line 16, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/homepage.scss */
+#body h1 {
+  font-size: 72px;
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Chalkduster";
+}
+
+/* line 24, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/homepage.scss */
+#body p {
+  font-size: 36px;
+  text-align: center;
+  margin: 20px;
+  color: blue;
+  font-family: "Chalkduster";
+}
+/* line 5, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/matches.scss */
+.winner {
+  text-align: center;
+  font-size: 24px;
+  font-family: "Chalkduster";
+  color: blue;
+}
+
+/* line 12, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/matches.scss */
+.winner h1 {
+  color: red;
+  margin-top: 150px;
+  margin-bottom: 30px;
+  font-size: 48px;
+}
+/* line 1, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/newplayer.scss */
+.create_player {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Chalkduster";
+  color: red;
+  margin-top: 150px;
+}
+
+/* line 9, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/newplayer.scss */
+.create_player h1 {
+  font-size: 48px;
+}
+
+/* line 13, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/newplayer.scss */
+.field, .actions {
+  font-size: 24px;
+  text-align: center;
+  color: blue;
+  display: inline-table;
+  margin: 20px;
+  padding: 10px;
+}
+/* line 1, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/player_bio.scss */
+.player_bio {
+  text-align: center;
+  color: blue;
+  font-family: "Chalkduster";
+  font-size: 24px;
+}
+
+/* line 8, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/player_bio.scss */
+.player_head h1 {
+  color: red;
+  font-size: 48px;
+  margin-top: 150px;
+}
+/* line 4, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/standings.scss */
+.standings h1 {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Chalkduster";
+  font-size: 64px;
+  color: red;
+  margin-top: 150px;
+}
+
+/* line 13, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/standings.scss */
+.table thead {
+  font-size: 28px;
+  color: blue;
+  font-family: "Chalkduster";
+  text-align: center;
+}
+
+/* line 20, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/standings.scss */
+.table tbody {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Chalkduster";
+  text-align: center;
+  color: #000;
+}
+
+/* line 28, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/standings.scss */
+.button {
+  font-size: 22px;
+}
+/* line 1, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/subscore.scss */
+.subpage {
+  font-family: "Chalkduster";
+  text-align: center;
+}
+
+/* line 6, /Users/zachroberts/Documents/Wyncode/pingpong/app/assets/stylesheets/subscore.scss */
+.subscore h1 {
+  font-size: 48px;
+  margin-top: 150px;
+  color: red;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
