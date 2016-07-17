@@ -13,6 +13,7 @@
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
+<h5>Currently logged in as, <%= @current_player.first_name + " " + current_player.last_name %></h5>
 <h1><%= alert %></h1>
 <div id="body">
     <h1>ProjectX Ping Pong League</h1><br>

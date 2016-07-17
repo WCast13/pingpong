@@ -11,7 +11,7 @@ class PlayersController < ApplicationController
          session[:player_id] = @player.id
          @player.first_name
         redirect_to @player, alert: "Welcome, #{@player.first_name}"
-        session[:player_id]
+        current_player
       else
           # If user's login doesn't work, send them back to the login form.
           # flash[:notice] =
@@ -22,7 +22,6 @@ class PlayersController < ApplicationController
   def logout
   session[:player_id] = nil
   redirect_to '/', alert: "You are now logged out"
-  session[:player_id]
 end
 
 
@@ -31,6 +30,7 @@ end
   # GET /players.json
   def standings
      redirect_to login_path if session[:player_id].nil?
+     current_player
     Player.all.each do |player|
       if player.losses == 0 && player.wins == 0
         player.update(win_percentage: 0)
@@ -71,7 +71,7 @@ end
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
-
+    current_player
     respond_to do |format|
       if @player.save
         session[:player_id] = @player.id

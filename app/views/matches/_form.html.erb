@@ -10,25 +10,19 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :winners_slack_name %>
-    <%= f.text_field :winners_slack_name %>
+    <%= f.label :opponent_username %>
+    <%= f.text_field :opponent_username %>
   </div>
 
   <div class="field">
-    <%= f.label :losers_slack_name %>
-    <%= f.text_field :losers_slack_name %>
+    <%= f.label :your_score %>
+    <%= f.number_field :your_score %>
   </div>
 
   <div class="field">
-    <%= f.label :winners_score %>
-    <%= f.number_field :winners_score %>
-  </div>
-
-  <div class="field">
-    <%= f.label :losers_score %>
-    <%= f.number_field :losers_score %>
+    <%= f.label :opponent_score %>
+    <%= f.number_field :opponent_score %>
   </div>
 
   <div class="button">

@@ -7,8 +7,9 @@
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-
+  <h5>Currently logged in as, <%= @current_player.first_name + " " + current_player.last_name %></h5>
 <div class="winner">
+
   <h1>Congrats <%= @match.winners_slack_name %> you have won!!!! </h1>
   <p>
     <strong>Winners slack name:</strong>

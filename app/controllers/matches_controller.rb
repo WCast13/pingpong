@@ -10,27 +10,34 @@ class MatchesController < ApplicationController
   # GET /matches/1
   # GET /matches/1.json
   def show
+     #admin
     Player.all
+  end
   end
 
   # GET /matches/new
   def new
-    redirect_to login_path if session[:player_id].nil?
+    # redirect_to '/' if session[:player_id].nil?
+    # current_player
     @match = Match.new
-
   end
+
 
   # GET /matches/1/edit
   def edit
+    # redirect_to '/' if session[:player_id]
   end
 
   # POST /matches
   # POST /matches.json
   def create
     @match = Match.new(match_params)
-    # p "*" * 50
-    # p match_params
-    # p "*" * 50
+    Player.all.each do |player|
+      player_name_array << player
+    end
+      if player_name_array.exclude?(@match.opponent_username)
+        redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
+      end
     @player_winner = Player.find_by(slack_name: match_params["winners_slack_name"])
     @player_loser = Player.find_by(slack_name: match_params["losers_slack_name"])
 
@@ -52,6 +59,7 @@ class MatchesController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /matches/1
   # PATCH/PUT /matches/1.json
@@ -87,4 +95,3 @@ class MatchesController < ApplicationController
     def match_params
       params.require(:match).permit(:winners_slack_name, :losers_slack_name, :winners_score, :losers_score)
     end
-end

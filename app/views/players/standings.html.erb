@@ -20,7 +20,6 @@
 </div>
 
 
-
 <table class="table">
   <thead>
     <tr>
@@ -39,13 +38,13 @@
     <% @players.each_with_index do |player, index| %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= player.first_name + " " + player.last_name %></td>
+        <td><%= link_to player.first_name + " " + player.last_name, player %></td>
         <td><%= player.wins %></td>
         <td><%= player.losses %></td>
         <td><%=player.win_percentage  %>%</td>
         <td><%= player.pf %></td>
         <td><%= player.pa %></td>
-        <td type="button" class="button"><%= link_to 'Show Player', player %></td>
+        <!-- <td type="button" class="button"><%= link_to 'Show Player', player %></td> -->
         <!-- <td><%= link_to 'Edit', edit_player_path(player) %></td> -->
         <!-- <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
