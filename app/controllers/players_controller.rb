@@ -1,12 +1,36 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
+  #GET /login
+  def login_page
+  end
+  #post /login
+  def login
+     @player = Player.find_by(user_name: params[:user_name])
+      # If the player exists AND the password entered is correct.
+      if @player && @player.authenticate(params[:password])
+         session[:player_id] = @player.id
+         @player.first_name
+        redirect_to @player, alert: "Welcome, #{@player.first_name}"
+        session[:player_id]
+      else
+          # If user's login doesn't work, send them back to the login form.
+          # flash[:notice] =
+      redirect_to login_path, alert: "unsucessful login"
+
+      end
+  end
+  def logout
+  session[:player_id] = nil
+  redirect_to '/', alert: "You are now logged out"
+  session[:player_id]
+end
 
 
 
   # GET /players
   # GET /players.json
   def standings
-
+     redirect_to login_path if session[:player_id].nil?
     Player.all.each do |player|
       if player.losses == 0 && player.wins == 0
         player.update(win_percentage: 0)
@@ -50,6 +74,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
+        session[:player_id] = @player.id
+
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
@@ -91,6 +117,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:name, :slack_name)
+      params.require(:player).permit(:first_name, :last_name, :user_name, :password, :password_confirmation)
     end
 end

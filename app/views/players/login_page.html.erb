@@ -6,17 +6,26 @@
       <li><%= link_to "logout", '/logout' %></li>
       <% end %>
     <li><%= link_to "Home", '/' %></li>
-        <% if session[:player_id].nil? %>
     <li><%= link_to 'New Player', '/new' %></li>
-    <% end %>
     <li><%= link_to "Standings", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
+    <li><%= link_to 'Logout', '/logout' %></li>
   </ul>
 </header>
+
+<h1>Login</h1>
 <h1><%= alert %></h1>
-<div id="body">
-    <h1>ProjectX Ping Pong League</h1><br>
-    <p>Play Matches for Fun</p><br>
-    <p>Record the Results</p><br>
-    <p>Determine the Champion</p>
-</div>
+<%= form_tag '/login' do %>
+
+  <div class="field">
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <%= submit_tag "Login" %>
+
+<% end %>

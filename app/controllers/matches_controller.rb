@@ -15,6 +15,7 @@ class MatchesController < ApplicationController
 
   # GET /matches/new
   def new
+    redirect_to login_path if session[:player_id].nil?
     @match = Match.new
 
   end

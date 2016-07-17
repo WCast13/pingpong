@@ -1,12 +1,17 @@
 <header>
   <ul class="nav nav-tabs nav-justified">
+    <% if session[:player_id].nil? %>
+    <li><%= link_to "login", '/login' %></li>
+    <% else %>
+      <li><%= link_to "logout", '/logout' %></li>
+      <% end %>
     <li><%= link_to "Home", '/' %></li>
     <li><%= link_to 'New Player', '/new' %></li>
     <li><%= link_to "Standings", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-
+<div class="Welcome_message"><h1><%= alert %></h1></div>
 <div class="player_bio">
   <div class = "player_head">
     <h1>Player Bio Page</h1>
@@ -16,12 +21,12 @@
   <div class="player_text">
     <p>
       <strong>Name:</strong>
-      <%= @player.name %>
+      <%= @player.first_name.capitalize + " " + @player.last_name.capitalize %>
     </p>
 
     <p>
-      <strong>Slack name:</strong>
-      <%= @player.slack_name %>
+      <strong>Username:</strong>
+      <%= @player.user_name %>
     </p>
 
     <p>

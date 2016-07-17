@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/new' => 'players#new'
   get '/standings' => 'players#standings'
   get '/matches' => 'players#standings'
-  
-
+  get '/login' => 'players#login_page'
+  post '/login' => 'players#login'
+  get '/logout' => 'players#logout'
 end
