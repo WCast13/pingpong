@@ -2,11 +2,12 @@ class Match < ApplicationRecord
 has_many :player_matches
 has_many :players, through: :player_matches
 # has_and_belongs_to_many :players
-array = []
-Player.all.each do |player|
-  array << player.user_name
-end
-validates_inclusion_of :opponent_username, in: array, message: "The username is not in this league, Sorry :("
+# array = []
+# Player.all.each do |player|
+#   array << player.user_name
+# end
+validates_inclusion_of :opponent_username, in: Player.all.map(&:user_name), message: "The username is not in this league, Sorry :("
+
 end
 
 

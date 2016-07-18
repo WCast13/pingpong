@@ -1,5 +1,8 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :current_player
+  before_action :admin_access, only: [:show, :edit, :update, :destroy]
+
   #GET /login
   def login_page
   end
@@ -16,32 +19,14 @@ class PlayersController < ApplicationController
           # If user's login doesn't work, send them back to the login form.
           # flash[:notice] =
       redirect_to login_path, alert: "unsucessful login"
-
       end
   end
   def logout
   session[:player_id] = nil
   redirect_to '/', alert: "You are now logged out"
-end
-
-
-
-
+  end
   def standings
-     redirect_to login_path if session[:player_id].nil?
-    Player.all.each do |player|
-      if player.losses == 0 && player.wins == 0
-        player.win_percentage = 0
-        player.save
-      elsif player.losses == 0
-        player.win_percentage = 100
-        player.save
-      else
-
-        d = player.wins + player.losses.to_f
-      player.update win_percentage: (player.wins / d * 100).round(2)
-      end
-    end
+    update_standings
     @players = Player.all.sort { |a,b|
       a.win_percentage == b.win_percentage ? b.pf <=> a.pf : b.win_percentage <=> a.win_percentage
     }
@@ -117,5 +102,17 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
       params.require(:player).permit(:first_name, :last_name, :user_name, :password, :password_confirmation)
+    end
+    def update_standings
+      Player.all.each do |player|
+        if player.losses == 0 && player.wins == 0
+          player.update(win_percentage: 0)
+        elsif player.losses == 0
+          player.update(win_percentage: 100)
+        else
+          d = player.wins + player.losses.to_f
+        player.update win_percentage: (player.wins / d * 100).round(2)
+        end
+      end
     end
 end

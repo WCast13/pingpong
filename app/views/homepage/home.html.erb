@@ -5,7 +5,7 @@
     <% else %>
       <li><%= link_to "logout", '/logout' %></li>
       <% end %>
-    <li><%= link_to "Home", '/' %></li>
+    <!-- <li><%= link_to "Home", '/' %></li> -->
         <% if session[:player_id].nil? %>
     <li><%= link_to 'New Player', '/new' %></li>
     <% end %>
@@ -14,12 +14,12 @@
   </ul>
 </header>
 <% if @current_player %>
-<h5>Currently logged in as, <%= @current_player.first_name + " " + current_player.last_name %></h5>
+<h3>Currently logged in as: <%= @current_player.user_name.capitalize %></h3>
 <% end %>
 <h1><%= alert %></h1>
 <div id="body">
     <h1>ProjectX Ping Pong League</h1><br>
-    <p>Play Matches for Fun</p><br>
+    <p>Play Matches</p><br>
     <p>Record the Results</p><br>
     <p>Determine the Champion</p>
 </div>
