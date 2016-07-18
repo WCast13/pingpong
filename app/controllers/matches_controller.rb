@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
-
+  before_action :current_player
   # GET /matches
   # GET /matches.json
   def index
@@ -13,13 +13,11 @@ class MatchesController < ApplicationController
      #admin
     Player.all
   end
-  end
 
   # GET /matches/new
   def new
-    # redirect_to '/' if session[:player_id].nil?
-    # current_player
     @match = Match.new
+
   end
 
 
@@ -32,25 +30,38 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
     @match = Match.new(match_params)
+    player_name_array = []
     Player.all.each do |player|
-      player_name_array << player
+      player_name_array << player.user_name
     end
       if player_name_array.exclude?(@match.opponent_username)
-        redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
+        return redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
       end
-    @player_winner = Player.find_by(slack_name: match_params["winners_slack_name"])
-    @player_loser = Player.find_by(slack_name: match_params["losers_slack_name"])
 
     respond_to do |format|
       if @match.save
-        format.html { redirect_to @match, notice: 'Match was successfully created.' }
-        format.json { render :show, status: :created, location: @match }
+        format.html { redirect_to '/standings', notice: 'Match was successfully created.' }
+        format.json { render :show, status: :created, location: '/standings' }
+        #You won the match
+              if @match.your_score > @match.opponent_score
+            @player_winner = @current_player
+            @player_loser = Player.find_by(user_name: match_params["opponent_username"])
+            @player_winner.pf += @match.your_score
+            @player_loser.pf += @match.opponent_score
+            @player_winner.pa += @match.opponent_score
+            @player_loser.pa += @match.your_score
+            #Your opponent won the match
+            else
+            @player_winner = Player.find_by(user_name: match_params["opponent_username"])
+            @player_loser = @current_player
+            @player_winner.pf += @match.opponent_score
+            @player_loser.pf += @match.your_score
+            @player_winner.pa += @match.opponent_score
+            @player_loser.pa += @match.your_score
+            end
         @player_winner.wins += 1
-        @player_winner.pf += @match.winners_score
-        @player_winner.pa += @match.losers_score
         @player_loser.losses += 1
-        @player_loser.pf += @match.losers_score
-        @player_loser.pa += @match.winners_score
+
         @player_winner.save
         @player_loser.save
       else
@@ -93,5 +104,6 @@ class MatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.require(:match).permit(:winners_slack_name, :losers_slack_name, :winners_score, :losers_score)
+      params.require(:match).permit(:opponent_username, :opponent_score, :your_score)
     end
+  end

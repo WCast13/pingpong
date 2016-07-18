@@ -30,7 +30,7 @@ end
   # GET /players.json
   def standings
      redirect_to login_path if session[:player_id].nil?
-     current_player
+
     Player.all.each do |player|
       if player.losses == 0 && player.wins == 0
         player.update(win_percentage: 0)

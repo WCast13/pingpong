@@ -1,17 +1,22 @@
 <header>
   <ul class="nav nav-tabs nav-justified">
-    <li><%= link_to "login", '/login' %></li>
     <li><%= link_to "Home", '/' %></li>
+    <li><%= link_to 'New Player', '/new' %></li>
     <li><%= link_to "Standings", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-<%= alert %>
+<h2><%= alert %></h2>
 <div class="subpage">
   <div class="subscore">
     <h1>Submit Score</h1>
   </div>
-<div class="form">
-  <%= render 'form', match: @match %>
-</div>
+
+  <div class= "subform">
+    <% p @current_player %>
+    <%= render 'form', match: @match %>
+    <!-- <button>
+      <%= link_to 'Home', '/' %>
+    </button> -->
+    </div>
 </div>
