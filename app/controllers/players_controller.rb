@@ -26,27 +26,26 @@ end
 
 
 
-  # GET /players
-  # GET /players.json
+
   def standings
      redirect_to login_path if session[:player_id].nil?
-
     Player.all.each do |player|
       if player.losses == 0 && player.wins == 0
-        player.update(win_percentage: 0)
+        player.win_percentage = 0
+        player.save
       elsif player.losses == 0
-        player.update(win_percentage: 100)
+        player.win_percentage = 100
+        player.save
       else
-        player.update(win_percentage: (player.wins/(player.wins + player.losses)) * 100)
+
+        d = player.wins + player.losses.to_f
+      player.update win_percentage: (player.wins / d * 100).round(2)
       end
-
     end
-
-
     @players = Player.all.sort { |a,b|
       a.win_percentage == b.win_percentage ? b.pf <=> a.pf : b.win_percentage <=> a.win_percentage
     }
-    end
+  end
 
   # GET /players/1
   # GET /players/1.json
