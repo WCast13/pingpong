@@ -42,6 +42,8 @@ class MatchesController < ApplicationController
       end
     respond_to do |format|
       if @match.save
+        puts  "*" * 50
+        p create_playermatch
         determine_score(@match)
       # p   @current_player.save
       # p   Player.find_by(user_name: match_params["opponent_username"]).save
@@ -107,6 +109,10 @@ class MatchesController < ApplicationController
          @player_loser.losses += 1
          @player_winner.save
          @player_loser.save
+    end
+    def create_playermatch
+      PlayerMatch.create(player_id: @current_player.id, match_id: @match.id)
+      PlayerMatch.create(player_id: Player.find_by(user_name: match_params["opponent_username"]).id, match_id: @match.id)
     end
 
 
