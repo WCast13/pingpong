@@ -1,10 +1,14 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   before_action :current_player
-  before_action :admin_access, only: [:show, :edit, :update, :destroy]
+  before_action :admin_access, only: [:index, :show, :edit, :update, :destroy]
 
   #GET /login
   def login_page
+  end
+  #GET /players
+  def index
+    @players = Player.all
   end
   #post /login
   def login
@@ -114,5 +118,8 @@ class PlayersController < ApplicationController
         player.update win_percentage: (player.wins / d * 100).round(2)
         end
       end
+    end
+    def admin_access
+      return redirect_to '/' if @current_player.nil? || @current_player.user_name != "admin"
     end
 end

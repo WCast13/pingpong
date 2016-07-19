@@ -110,6 +110,7 @@ class MatchesController < ApplicationController
          @player_winner.save
          @player_loser.save
     end
+
     def create_playermatch
       PlayerMatch.create(player_id: @current_player.id, match_id: @match.id)
       PlayerMatch.create(player_id: Player.find_by(user_name: match_params["opponent_username"]).id, match_id: @match.id)
@@ -119,5 +120,8 @@ class MatchesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
       params.require(:match).permit(:opponent_username, :opponent_score, :your_score)
+    end
+    def admin_access
+      return redirect_to '/' if @current_player.nil? || @current_player.user_name != "admin"
     end
   end

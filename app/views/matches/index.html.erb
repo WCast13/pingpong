@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Winners slack name</th>
-      <th>Losers slack name</th>
+      <th>Winners User Name</th>
+      <th>Losers User Name</th>
       <th>Winners score</th>
       <th>Losers score</th>
       <th colspan="3"></th>
@@ -16,10 +16,20 @@
   <tbody>
     <% @matches.each do |match| %>
       <tr>
-        <td><%= match.winners_slack_name %></td>
-        <td><%= match.losers_slack_name %></td>
-        <td><%= match.winners_score %></td>
-        <td><%= match.losers_score %></td>
+        <% if match.your_score > match.opponent_score %>
+        <td><%= @current_player.user_name %></td>
+        <td><%= match.opponent_username %></td>
+        <td><%= match.your_score %></td>
+        <td><%= match.opponent_score %></td>
+        <% else %>
+        <td><%= match.opponent_username %></td>
+        <td><%= @current_player.user_name %></td>
+        <td><%= match.opponent_score %></td>
+        <td><%= match.your_score %></td>
+        <% end %>
+
+
+
         <td><%= link_to 'Show', match %></td>
         <td><%= link_to 'Edit', edit_match_path(match) %></td>
         <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
