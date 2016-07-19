@@ -35,6 +35,8 @@
 
   <tbody>
     <% @players.each_with_index do |player, index| %>
+    <% next if player.user_name = "admin" %>
+
       <tr>
         <td><%= index + 1 %></td>
         <td><%= link_to player.first_name + " " + player.last_name, player %></td>
