@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713184257) do
+ActiveRecord::Schema.define(version: 20160719004302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "leagues", force: :cascade do |t|
+    t.string   "league_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "matches", force: :cascade do |t|
     t.string   "opponent_username"
@@ -44,6 +50,9 @@ ActiveRecord::Schema.define(version: 20160713184257) do
     t.integer  "pf"
     t.integer  "pa"
     t.float    "win_percentage"
+    t.integer  "league_id"
+    t.index ["league_id"], name: "index_players_on_league_id", using: :btree
   end
 
+  add_foreign_key "players", "leagues"
 end

@@ -43,7 +43,11 @@ class PlayersController < ApplicationController
 
   # GET /players/new
   def new
+    @league_names = []
     @player = Player.new
+     League.all.each do |league|
+    @league_names << league.league_name
+  end
   end
 
   # GET /players/1/edit

@@ -32,6 +32,13 @@
   <%= f.password_field :password_confirmation %>
 </div>
 
+<div class="field">
+<%= f.label :league %>
+<%= f.select :league, @league_names%>
+
+</div>
+
+
   <div class="actions">
     <%= f.submit "Create Player" %>
   </div>
