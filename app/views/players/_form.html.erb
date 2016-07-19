@@ -31,13 +31,12 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 </div>
-
 <div class="field">
-<%= f.label :league %>
-<%= f.select :league, @league_names%>
-
+<%= f.collection_select(:league_id, League.all, :id, :league_name, {:prompt => 'Select a League', :selected => @player.league_id})%>
 </div>
-
+<% p "*" * 50 %>
+<% @player.league_id %>
+<% p "*" * 50 %>
 
   <div class="actions">
     <%= f.submit "Create Player" %>

@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   before_action :current_player
   before_action :admin_access, only: [:index, :show, :edit, :update, :destroy]
-
+  before_action :current_leauge, only: [:standings]
   #GET /login
   def login_page
   end
@@ -31,7 +31,13 @@ class PlayersController < ApplicationController
   end
   def standings
     update_standings
-    @players = Player.all.sort { |a,b|
+    @players = []
+    Player.all.each do |player|
+      if player.league_id == @current_player.league_id && player.user_name != "admin"
+      @players << player
+    end
+    end
+    @players = @players.sort { |a,b|
       a.win_percentage == b.win_percentage ? b.pf <=> a.pf : b.win_percentage <=> a.win_percentage
     }
   end
@@ -109,7 +115,7 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:first_name, :last_name, :user_name, :password, :password_confirmation)
+      params.require(:player).permit(:first_name, :last_name, :user_name, :password, :password_confirmation, :league_id)
     end
     def update_standings
       Player.all.each do |player|

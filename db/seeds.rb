@@ -6,5 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Player.destroy_all
-Player.create(user_name: "admin", first_name: "admin", last_name: "admin", password: "admin", wins: 10, losses: 3, pf: 121, pa:85)
-Player.create(user_name: "zach", first_name: "jeff", last_name: "dont", password: "admin", wins: 0, losses: 0, pf: 0, pa: 0)
+League.destroy_all
+League.create(league_name: "Wyncode")
+League.create(league_name: "Just here to check it out")
