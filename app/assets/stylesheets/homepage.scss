@@ -4,12 +4,16 @@
 body {
   background-image: image-url(new_photo);
   background-size: cover;
+  background-repeat: no-repeat;
 }
+.nav-tabs.nav-justified>li>a{
+  background-color: #E8E1CF;
 
+}
 header li{
   font-size: 28px;
   font-weight: bold;
-  color: white;
+  color: #E8E1CF;
   font-family: "Chalkduster";
 }
 

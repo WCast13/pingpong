@@ -9,6 +9,10 @@
         <% if session[:player_id].nil? %>
     <li><%= link_to 'New Player', '/new' %></li>
     <% end %>
+    <% if @current_player != nil && @current_player.user_name = "admin" %>
+    <li><%= link_to "Show Players", '/players' %></li>
+    <li><%= link_to "Show Matches", '/matches' %></li>
+    <% end %>
     <li><%= link_to "Standings", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
