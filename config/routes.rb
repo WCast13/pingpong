@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get '/login' => 'players#login_page'
   post '/login' => 'players#login'
   get '/logout' => 'players#logout'
+  get '/challenge' => 'players#challenge'
+  post '/challenge' => 'players#create_challenge'
 end

@@ -1,0 +1,14 @@
+<h1>Challenge</h1>
+<!-- <p> Note you can only challenge players with a rank that is higher than yours</p> -->
+
+<h1><%= alert %></h1>
+<%= form_tag '/challenge' do %>
+
+  <div class="field">
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name %>
+  </div>
+
+  <%= submit_tag "Challenge" %>
+
+<% end %>

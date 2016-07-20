@@ -3,6 +3,8 @@ class PlayersController < ApplicationController
   before_action :current_player
   before_action :admin_access, only: [:index, :show, :edit, :update, :destroy]
   before_action :current_leauge, only: [:standings]
+  before_action :standings_array, only: [:standings, :create]
+  before_action :not_a_user, only: [:standings]
   #GET /login
   def login_page
   end
@@ -35,10 +37,10 @@ class PlayersController < ApplicationController
     Player.all.each do |player|
       if player.league_id == @current_player.league_id && player.user_name != "admin"
       @players << player
-    end
+      end
     end
     @players = @players.sort { |a,b|
-      a.win_percentage == b.win_percentage ? b.pf <=> a.pf : b.win_percentage <=> a.win_percentage
+      a.standings_position <=> b.standings_position
     }
   end
 
@@ -63,12 +65,14 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
+
     @player = Player.new(player_params)
     @player.wins = 0
     @player.losses = 0
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
+    # @player.standings_position = standings_position.max + 1
     current_player
     respond_to do |format|
       if @player.save
@@ -106,6 +110,23 @@ class PlayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #GET /challenge
+  # def challenge
+  # end
+  #POST /challenge
+  # def create_challenge
+  #   if Player.find_by(user_name: params[:user_name]).nil?
+  #     redirect_to '/challenge', alert: "That Player doesn't exists, Please enter players username"
+  # elsif @current_player.standings_position  < Player.find_by(user_name: params[:user_name]).standings_position
+  #     redirect_to '/challenge', alert: "Sorry your rank is higher than #{Player.find_by(user_name: params[:user_name]).user_name}'s rank"
+  #   else
+  #     #alert other player that they have been challenged!
+  #     redirect_to '/matches/new', alert: "Player has been challenged"
+  #
+  #   end
+  # end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -131,5 +152,13 @@ class PlayersController < ApplicationController
     end
     def admin_access
       return redirect_to '/' if @current_player.nil? || @current_player.user_name != "admin"
+    end
+    def standings_array
+      standings_array = [0]
+      Player.all.each do |player|
+        next if player.user_name == "admin"
+        standings_array << player.standings_position
+      end
+      p standings_array.max + 1
     end
 end

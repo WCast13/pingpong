@@ -35,9 +35,9 @@
   </thead>
   <tbody>
     <% p @players %>
-    <% @players.each_with_index do |player, index| %>
+    <% @players.each_with_index do |player| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= player.standings_position %></td>
         <td><%= link_to player.first_name + " " + player.last_name, player %></td>
         <td><%= player.wins %></td>
         <td><%= player.losses %></td>
