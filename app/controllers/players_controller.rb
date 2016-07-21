@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   before_action :current_player
-  before_action :admin_access, only: [:index, :show, :edit, :update, :destroy]
+  before_action :admin_access, only: [:index, :edit, :update, :destroy]
   before_action :current_leauge, only: [:standings]
   before_action :standings_array, only: [:standings, :create]
   before_action :not_a_user, only: [:standings]
