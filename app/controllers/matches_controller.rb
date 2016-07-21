@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
 
   # GET /matches/new
   def new
-    redirect_to '/', alert: "Please log-in, or create a new player in order to submtit a score" if session[:player_id].nil?
+    redirect_to '/', alert: "Please log-in, or create a new player in order to submtit a score" if session[:player_user_name].nil?
     @match = Match.new
 
 
@@ -36,9 +36,9 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
     @match = Match.new(match_params)
-    @current_player.update(standings_position: 1)
-    @current_player.update(wins: 0)
-      @current_player.update(losses: 0)
+    # @current_player.update(standings_position: 1)
+    # @current_player.update(wins: 0)
+    #   @current_player.update(losses: 0)
     opponent = Player.find_by(user_name: @match.opponent_username)
     sp = opponent.standings_position
 #This is to get rid of names that are not in our database

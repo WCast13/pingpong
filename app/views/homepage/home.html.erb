@@ -1,12 +1,12 @@
 <header>
   <ul class="nav nav-tabs nav-justified">
-    <% if session[:player_id].nil? %>
+    <% if session[:player_user_name].nil?  %>
     <li><%= link_to "login", '/login' %></li>
     <% else %>
       <li><%= link_to "logout", '/logout' %></li>
       <% end %>
     <!-- <li><%= link_to "Home", '/' %></li> -->
-        <% if session[:player_id].nil? %>
+        <% if session[:player_user_name].nil? %>
     <li><%= link_to 'New Player', '/new' %></li>
     <% end %>
     <% if @current_player != nil && @current_player.user_name = "admin" %>
@@ -17,8 +17,8 @@
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-<% if @current_player %>
-<h3>Currently logged in as: <%= @current_player.user_name.capitalize %></h3>
+<% if session[:player_user_name] %>
+<h3>Currently logged in as: <%= session[:player_user_name].capitalize %></h3>
 <% end %>
 <h1><%= alert %></h1>
 <div id="body">

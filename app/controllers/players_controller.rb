@@ -17,8 +17,7 @@ class PlayersController < ApplicationController
      @player = Player.find_by(user_name: params[:user_name])
       # If the player exists AND the password entered is correct.
       if @player && @player.authenticate(params[:password])
-         session[:player_id] = @player.id
-         @player.first_name
+         session[:player_user_name] = @player.user_name
         redirect_to @player, alert: "Welcome, #{@player.first_name}"
         current_player
       else
@@ -28,8 +27,9 @@ class PlayersController < ApplicationController
       end
   end
   def logout
-  session[:player_id] = nil
-  redirect_to '/', alert: "You are now logged out"
+  session[:player_user_name] = nil
+  @current_player = nil
+  redirect_to '/login', alert: "You are now logged out"
   end
   def standings
     update_standings
@@ -72,16 +72,15 @@ class PlayersController < ApplicationController
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
-    if @player.user_name == "admin"
-    @player.standings_position = 1200
-  else
+  #   if @player.user_name == "admin"
+  #   @player.standings_position = 1200
+  # else
     @player.standings_position = @standings_array.max + 1
-  end
+  # end
     current_player
     respond_to do |format|
       if @player.save
-        session[:player_id] = @player.id
-
+        session[:player_user_name] = @player.user_name
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else

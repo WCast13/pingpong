@@ -1,6 +1,6 @@
 <header>
   <ul class="nav nav-tabs nav-justified">
-    <% if session[:player_id].nil? %>
+    <% if session[:player_user_name].nil? %>
     <!-- <li><%= link_to "login", '/login' %></li> -->
     <% else %>
       <li><%= link_to "logout", '/logout' %></li>
@@ -9,9 +9,9 @@
     <li><%= link_to 'New Player', '/new' %></li>
   </ul>
 </header>
-
-<h1>Login</h1>
 <h1><%= alert %></h1>
+<h1>Login</h1>
+
 <%= form_tag '/login' do %>
 
   <div class="field">
