@@ -72,7 +72,11 @@ class PlayersController < ApplicationController
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
+    if @player.user_name == "admin"
+    @player.standings_position = 1200
+  else
     @player.standings_position = @standings_array.max + 1
+  end
     current_player
     respond_to do |format|
       if @player.save

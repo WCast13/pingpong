@@ -23,6 +23,7 @@ class MatchesController < ApplicationController
     redirect_to '/', alert: "Please log-in, or create a new player in order to submtit a score" if session[:player_id].nil?
     @match = Match.new
 
+
   end
 
 
@@ -36,31 +37,27 @@ class MatchesController < ApplicationController
   def create
     @match = Match.new(match_params)
     @current_player.update(standings_position: 1)
-    sp = Player.find_by(user_name: @match.opponent_username).standings_position
+    @current_player.update(wins: 0)
+      @current_player.update(losses: 0)
+    opponent = Player.find_by(user_name: @match.opponent_username)
+    sp = opponent.standings_position
+#This is to get rid of names that are not in our database
       if Player.all.map(&:user_name).exclude?(@match.opponent_username)
         return redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
+        #This is if the scores are equal
       elsif @match.your_score == @match.opponent_score
         return redirect_to '/matches/new', alert: "There's no ties in ping pong, like there is no ties in life"
+        #This is if the current user tries to play himself
       elsif @match.opponent_username == @current_player.user_name
         return redirect_to '/matches/new', alert: "You can't play yourself in pingpong unless your Forest Gump"
+        #This is if the current user, but what if the opponent is the one with 0 wins/losses...fml
+      # elsif @current_player.wins == 0 && @current_player.losses == 0 || (opponent.wins == 0 && opponent.losses == 0)
+      #   return render_page
+        #Last thing I need to do!!!!!!!!!!is...fix the positions when a player first enters the league
       elsif !@current_player.standings_position.between?(sp - 2, sp + 2)
         return redirect_to '/matches/new', alert: "Opponent has to be within 2 ladder positions of you"
       end
-    respond_to do |format|
-      if @match.save
-        # create_playermatch
-        determine_score(@match)
-      # p   @current_player.save
-      # p   Player.find_by(user_name: match_params["opponent_username"]).save
-
-        format.html { redirect_to '/standings', notice: 'Match was successfully created.' }
-        format.json { render :show, status: :created, location: '/standings' }
-        #You won the match
-      else
-        format.html { render :new }
-        format.json { render json: @match.errors, status: :unprocessable_entity }
-      end
-    end
+    render_page
   end
 
 
@@ -167,6 +164,23 @@ class MatchesController < ApplicationController
         @current_player.update(standings_position: opponent.standings_position)
         opponent.update(standings_position: @current_player.standings_position + 2)
 
+      end
+    end
+    def render_page
+      respond_to do |format|
+        if @match.save
+          # create_playermatch
+          determine_score(@match)
+        # p   @current_player.save
+        # p   Player.find_by(user_name: match_params["opponent_username"]).save
+
+          format.html { redirect_to '/standings', notice: 'Match was successfully created.' }
+          format.json { render :show, status: :created, location: '/standings' }
+          #You won the match
+        else
+          format.html { render :new }
+          format.json { render json: @match.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
