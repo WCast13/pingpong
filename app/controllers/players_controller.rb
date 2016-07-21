@@ -32,6 +32,7 @@ class PlayersController < ApplicationController
   redirect_to '/', alert: "You are now logged out"
   end
   def standings
+    Player.find(1).update(standings_position: 4)
     update_standings
     @players = []
     Player.all.each do |player|

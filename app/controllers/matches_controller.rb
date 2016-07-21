@@ -34,21 +34,22 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
+
     @match = Match.new(match_params)
       if Player.all.map(&:user_name).exclude?(@match.opponent_username)
         return redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
-      elsif @current_player.standings_position  < Player.find_by(user_name: @match.opponent_username).standings_position
-          return redirect_to '/matches/new', alert: "That player has a lower rank than you"
+      # elsif @current_player.standings_position  < Player.find_by(user_name: @match.opponent_username).standings_position
+      #     return redirect_to '/matches/new', alert: "That player has a lower rank than you"
       elsif @match.opponent_username == @current_player.user_name
         return redirect_to '/matches/new', alert: "You can't play yourself in pingpong unless your Forest Gump"
       end
     respond_to do |format|
       if @match.save
-        puts  "*" * 50
-        p create_playermatch
+        # create_playermatch
         determine_score(@match)
       # p   @current_player.save
       # p   Player.find_by(user_name: match_params["opponent_username"]).save
+
         format.html { redirect_to '/standings', notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: '/standings' }
         #You won the match
@@ -90,9 +91,11 @@ class MatchesController < ApplicationController
     def set_match
       @match = Match.find(params[:id])
     end
+
+
     def determine_score(match)
       opponent = Player.find_by(user_name: match_params["opponent_username"])
-
+        #current player won :)
       if match.your_score > match.opponent_score
          @player_winner = @current_player
          @player_loser = opponent
@@ -100,28 +103,38 @@ class MatchesController < ApplicationController
          @player_loser.pf += match.opponent_score
          @player_winner.pa += match.opponent_score
          @player_loser.pa += match.your_score
+          if @current_player.standings_position > opponent.standings_position
+            change_ladder_positions
+          end
+
          #Your opponent won the match
-         else
+      else
          @player_winner = opponent
          @player_loser = @current_player
          @player_winner.pf += @match.opponent_score
          @player_loser.pf += @match.your_score
          @player_winner.pa += @match.opponent_score
          @player_loser.pa += @match.your_score
-         end
+          # if opponent.standings_position > @current_player.standings_position
+          if @current_player.standings_position < opponent.standings_position
+            change_ladder_positions
+          end
+
+        end
          @player_winner.wins += 1
          @player_loser.losses += 1
          #You win, and #
-        if match.your_score > match.opponent_score && @current_player.standings_position > opponent.standings_position
 
          @player_winner.save
          @player_loser.save
+
+
     end
 
-    def create_playermatch
-      PlayerMatch.create(player_id: @current_player.id, match_id: @match.id)
-      PlayerMatch.create(player_id: Player.find_by(user_name: match_params["opponent_username"]).id, match_id: @match.id)
-    end
+    # def create_playermatch
+    #   PlayerMatch.create(player_id: @current_player.id, match_id: @match.id)
+    #   PlayerMatch.create(player_id: Player.find_by(user_name: match_params["opponent_username"]).id, match_id: @match.id)
+    # end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -130,5 +143,27 @@ class MatchesController < ApplicationController
     end
     def admin_access
       return redirect_to '/' if @current_player.nil? || @current_player.user_name != "admin"
+    end
+    def change_ladder_positions
+
+      opponent = Player.find_by(user_name: match_params["opponent_username"])
+      #current player is 1, opponent 2
+      if @current_player.standings_position + 1 == opponent.standings_position
+        @current_player.update(standings_position: opponent.standings_position)
+        opponent.update(standings_position: @current_player.standings_position - 1)
+        #current player 1, opponnet 3
+      elsif  @current_player.standings_position + 2 == opponent.standings_position#opponent 2/3, current 1
+        @current_player.update(standings_position: opponent.standings_position)
+        opponent.update(standings_position: @current_player.standings_position - 2)
+        #current player 2, opponent 1
+      elsif opponent.standings_position + 1 == @current_player.standings_position
+        @current_player.update(standings_position: opponent.standings_position)
+        opponent.update(standings_position: @current_player.standings_position + 1)
+        #current player 3, opponent 1
+      elsif opponent.standings_position + 2 == @current_player.standings_position
+        @current_player.update(standings_position: opponent.standings_position)
+        opponent.update(standings_position: @current_player.standings_position + 2)
+
+      end
     end
   end

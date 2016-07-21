@@ -12,6 +12,7 @@
        <th>Points For</th>
        <th>Points Against</th>
        <th>League Name</th>
+       <th>Ladder Position</th>
        <th colspan="3"></th>
      </tr>
    </thead>
@@ -26,6 +27,7 @@
          <td><%= player.pf %></td>
          <td><%= player.pa %></td>
          <td><%= player.league.league_name %></td>
+         <td><%= player.standings_position %></td>
          <td><%= link_to 'Show', player %></td>
          <td><%= link_to 'Edit', edit_player_path(player) %></td>
          <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
