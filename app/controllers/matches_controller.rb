@@ -34,14 +34,17 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
-
     @match = Match.new(match_params)
+    @current_player.update(standings_position: 1)
+    sp = Player.find_by(user_name: @match.opponent_username).standings_position
       if Player.all.map(&:user_name).exclude?(@match.opponent_username)
         return redirect_to '/matches/new', alert: 'Your opponent was not found, please try again.'
-      # elsif @current_player.standings_position  < Player.find_by(user_name: @match.opponent_username).standings_position
-      #     return redirect_to '/matches/new', alert: "That player has a lower rank than you"
+      elsif @match.your_score == @match.opponent_score
+        return redirect_to '/matches/new', alert: "There's no ties in ping pong, like there is no ties in life"
       elsif @match.opponent_username == @current_player.user_name
         return redirect_to '/matches/new', alert: "You can't play yourself in pingpong unless your Forest Gump"
+      elsif !@current_player.standings_position.between?(sp - 2, sp + 2)
+        return redirect_to '/matches/new', alert: "Opponent has to be within 2 ladder positions of you"
       end
     respond_to do |format|
       if @match.save

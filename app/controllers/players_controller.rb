@@ -32,7 +32,6 @@ class PlayersController < ApplicationController
   redirect_to '/', alert: "You are now logged out"
   end
   def standings
-    Player.find(1).update(standings_position: 4)
     update_standings
     @players = []
     Player.all.each do |player|
@@ -66,14 +65,14 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-
+    standings_array
     @player = Player.new(player_params)
     @player.wins = 0
     @player.losses = 0
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
-    # @player.standings_position = standings_position.max + 1
+    @player.standings_position = @standings_array.max + 1
     current_player
     respond_to do |format|
       if @player.save
@@ -155,11 +154,11 @@ class PlayersController < ApplicationController
       return redirect_to '/' if @current_player.nil? || @current_player.user_name != "admin"
     end
     def standings_array
-      standings_array = [0]
+      @standings_array = [0]
       Player.all.each do |player|
         next if player.user_name == "admin"
-        standings_array << player.standings_position
+        next if player.standings_position == nil
+        @standings_array << player.standings_position
       end
-      p standings_array.max + 1
     end
 end
