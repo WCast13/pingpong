@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get '/logout' => 'players#logout'
   get '/challenge' => 'players#challenge'
   post '/challenge' => 'players#create_challenge'
+  get '/rules' => 'homepage#rules'
 end

@@ -1,41 +1,35 @@
-<header>
+  <!-- This is the nav bar at the top -->
+  <header>
   <ul class="nav nav-tabs nav-justified">
-    <% if @current_player.nil?  %>
-    <li><%= link_to "login", '/login' %></li>
-    <% else %>
       <li><%= link_to "logout", '/logout' %></li>
-      <% end %>
-    <!-- <li><%= link_to "Home", '/' %></li> -->
-        <% if @current_player.nil? %>
-    <li><%= link_to 'New Player', '/new' %></li>
-    <% end %>
-    <!-- <% if @current_player != nil && @current_player.user_name = "admin" %>
-    <li><%= link_to "Show Players", '/players' %></li>
-    <li><%= link_to "Show Matches", '/matches' %></li>
-    <% end %> -->
-    <li><%= link_to "Ladder", '/standings' %></li>
+    <li><%= link_to "Standings", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-<% if @current_player %>
+<!-- <% if @current_player %> -->
 <h3>Currently logged in as: <%= session[:player_user_name].capitalize %></h3>
-<% end %>
+<!-- <% end %> -->
 <h1><%= alert %></h1>
 <div id="body">
     <h1>ProjectX Ping Pong Ladder League</h1><br>
-    <% if @current_player.standings_position.nil? %>
+    <!-- <% if @current_player.standings_position.nil? %>
     <p>If you are new, challenge anyone on the ladder and if you win you get to take there spot, however if you
     lose then you start at the last position on the ladder</p><br>
-    <% else %>
+    <% else %> -->
+
+
     <p> <%= "You current position on the ladder is: #{@player_ladder}" %></p>
-    <% end %>
+    <!-- <% end %> -->
+      <!-- Determines what text will show on homepage, if user is #1 on ladder -->
     <% if @player_ladder == 1  %>
     <p>You are at the top of the ladder, how is the view from up there?</p>
+    <!-- This is if they are not 1 or 2 -->
     <% elsif @one_up_ladder && @two_up_ladder %>
     <p><%= "If you would like to move up, you can challenge #{@one_up_ladder.first_name} #{@one_up_ladder.last_name} , or #{@two_up_ladder.first_name} #{@two_up_ladder.last_name}" %></p>
+    <!-- And This handles if user is 2 on ladder -->
     <% elsif @one_up_ladder %>
           <p><%= "If you would like to move up, you can challenge #{@one_up_ladder.first_name} #{@two_up_ladder.last_name}" %></p>
     <% end %>
 
-    <p>Ladder tourney explaination: <a href = "http://sportmeets.com/help/topic/aboutLadders", target="_blank">ladder tourney</a></p>
+    <p>Ladder tourney rules: <%= link_to "Rules", '/rules' %></p>
 </div>
