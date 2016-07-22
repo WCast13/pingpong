@@ -2,8 +2,6 @@ class HomepageController < ApplicationController
   def home
     current_player
       not_a_user
-      # Player.find(2).update(standings_position: 1)
-      # Player.find(1).update(standings_position: 2)
       if @current_player && @current_player.user_name != "admin"
       @player_ladder = @current_player.standings_position
       if @current_player.standings_position != 1
@@ -13,5 +11,6 @@ class HomepageController < ApplicationController
       end
     end
     end
+# dfasfsfsafs
     end
 end

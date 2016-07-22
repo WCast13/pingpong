@@ -38,10 +38,6 @@
 <div class="field">
 <%= f.collection_select(:league_id, League.all, :id, :league_name, {:prompt => 'Select a League', :selected => @player.league_id})%>
 </div>
-<% p "*" * 50 %>
-<% @player.league_id %>
-<% p "*" * 50 %>
-
   <div class="actions">
     <%= f.submit "Create Player" %>
   </div>

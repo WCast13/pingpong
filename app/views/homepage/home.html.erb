@@ -1,23 +1,23 @@
 <header>
   <ul class="nav nav-tabs nav-justified">
-    <% if session[:player_user_name].nil?  %>
+    <% if @current_player.nil?  %>
     <li><%= link_to "login", '/login' %></li>
     <% else %>
       <li><%= link_to "logout", '/logout' %></li>
       <% end %>
     <!-- <li><%= link_to "Home", '/' %></li> -->
-        <% if session[:player_user_name].nil? %>
+        <% if @current_player.nil? %>
     <li><%= link_to 'New Player', '/new' %></li>
     <% end %>
-    <% if @current_player != nil && @current_player.user_name = "admin" %>
+    <!-- <% if @current_player != nil && @current_player.user_name = "admin" %>
     <li><%= link_to "Show Players", '/players' %></li>
     <li><%= link_to "Show Matches", '/matches' %></li>
-    <% end %>
+    <% end %> -->
     <li><%= link_to "Ladder", '/standings' %></li>
     <li><%= link_to "Submit Score", '/matches/new' %></li>
   </ul>
 </header>
-<% if session[:player_user_name] %>
+<% if @current_player %>
 <h3>Currently logged in as: <%= session[:player_user_name].capitalize %></h3>
 <% end %>
 <h1><%= alert %></h1>
@@ -29,7 +29,7 @@
     <% else %>
     <p> <%= "You current position on the ladder is: #{@player_ladder}" %></p>
     <% end %>
-    <% if @player_ladder == 1 %>
+    <% if @player_ladder == 1  %>
     <p>You are at the top of the ladder, how is the view from up there?</p>
     <% elsif @one_up_ladder && @two_up_ladder %>
     <p><%= "If you would like to move up, you can challenge #{@one_up_ladder}, or #{@two_up_ladder}" %></p>

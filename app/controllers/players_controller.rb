@@ -16,6 +16,7 @@ class PlayersController < ApplicationController
   def login
      @player = Player.find_by(user_name: params[:user_name])
       # If the player exists AND the password entered is correct.
+
       if @player && @player.authenticate(params[:password])
          session[:player_user_name] = @player.user_name
         redirect_to @player, alert: "Welcome, #{@player.first_name}"
@@ -27,8 +28,7 @@ class PlayersController < ApplicationController
       end
   end
   def logout
-  session[:player_user_name] = nil
-  @current_player = nil
+  reset_session
   redirect_to '/login', alert: "You are now logged out"
   end
   def standings
@@ -47,6 +47,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+
   end
 
   # GET /players/new
