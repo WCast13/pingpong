@@ -73,6 +73,7 @@ class PlayersController < ApplicationController
     @player.pf = 0
     @player.pa = 0
     @player.win_percentage = 0
+    session[:player_user_name] = @player.user_name
   #   if @player.user_name == "admin"
   #   @player.standings_position = 1200
   # else
