@@ -32,9 +32,9 @@
     <% if @player_ladder == 1  %>
     <p>You are at the top of the ladder, how is the view from up there?</p>
     <% elsif @one_up_ladder && @two_up_ladder %>
-    <p><%= "If you would like to move up, you can challenge #{@one_up_ladder}, or #{@two_up_ladder}" %></p>
+    <p><%= "If you would like to move up, you can challenge #{@one_up_ladder.first_name} #{@one_up_ladder.last_name} , or #{@two_up_ladder.first_name} #{@two_up_ladder.last_name}" %></p>
     <% elsif @one_up_ladder %>
-          <p><%= "If you would like to move up, you can challenge #{@one_up_ladder}" %></p>
+          <p><%= "If you would like to move up, you can challenge #{@one_up_ladder.first_name} #{@two_up_ladder.last_name}" %></p>
     <% end %>
 
     <p>Ladder tourney explaination: <a href = "http://sportmeets.com/help/topic/aboutLadders", target="_blank">ladder tourney</a></p>
