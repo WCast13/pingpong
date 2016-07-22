@@ -109,7 +109,15 @@ class PlayersController < ApplicationController
   # DELETE /players/1
   # DELETE /players/1.json
   def destroy
+    Player.all.each do |player|
+      if player.standings_position > @player.standings_position
+      player.standings_position -= 1
+      player.save
+    end
+  end
+
     @player.destroy
+
     respond_to do |format|
       format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
       format.json { head :no_content }
