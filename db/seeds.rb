@@ -9,7 +9,7 @@
 # League.destroy_all
 # League.create(league_name: "Wyncode")
 # League.create(league_name: "Just here to check it out")
-Player.all.each do |player|
-  player.standings_position -= 1
-  player.save
-end
+# Player.all.each do |player|
+#   player.standings_position -= 1
+#   player.save
+# end
