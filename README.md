@@ -24,3 +24,6 @@ Things you may want to cover:
 * ...
 
 This is a change 2
+
+This is change 3
+
